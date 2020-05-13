@@ -1,3 +1,45 @@
+
+div.ground {
+  position: relative;
+  width: 1000px;
+  height: 1000px;
+  background-color: bisque;
+  margin: auto;
+}
+
+.flipper-container {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+}
+
+.flipper {
+  position: absolute;
+  background-size: 100px 40px;
+  width: 100px;
+  height: 40px;
+}
+
+.flipper.left {
+  top: 0;
+  left: 10px;
+  background-image: url("https://exorciser.ch/_media/pub/flipper-left.png");
+  transform-origin: 18% 50%;
+  transform: rotateZ(32deg);
+}
+
+.flipper.right {
+  top: 0;
+  right: 10px;
+  background-image: url("https://exorciser.ch/_media/pub/flipper-right.png");
+  transform-origin: 82% 50%;
+  transform: rotateZ(-32deg);
+}
+
 #bumper {
   background-color: green;
   border-radius: 50%;
@@ -14,30 +56,6 @@
   line-height: 60px;
   color: greenyellow;
   font-weight: bold;
-}
-
-#flipper-left {
-  position: absolute;
-  top: 100px;
-  left: 10px;
-  width: 100px;
-  height: 40px;
-  background-image: url("https://exorciser.ch/_media/pub/flipper-left.png");
-  background-size: 100px 40px;
-  transform-origin: 18% 50%;
-  transform: rotateZ(32deg);
-}
-
-#flipper-right {
-  position: absolute;
-  top: 100px;
-  left: 150px;
-  width: 100px;
-  height: 40px;
-  background-image: url("https://exorciser.ch/_media/pub/flipper-right.png");
-  background-size: 100px 40px;
-  transform-origin: 82% 50%;
-  transform: rotateZ(-32deg);
 }
 
 #instruction {
