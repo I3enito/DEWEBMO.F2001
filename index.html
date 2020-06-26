@@ -4,16 +4,22 @@
     <meta charset="utf-8">
     <title>Retro Pinball</title>
     <link rel="stylesheet" href="globals.css">
-    <script src="script.js"></script>
-    <script src="logic.js" defer></script>
+    <!-- <script src="logic.js" defer></script>
+    <script src="table.js" defer></script>
+    <script src="collision.js" defer></script> -->
+    <script src="GameManager.js" defer></script>
+    <script src="Ball.js" defer></script>
 </head>
 
 <body>
     <div class="ground">
+        <div id="ball"></div>
         <div id="bumper">100</div>
         <div class="flipper-container">
             <div class="flipper left" id="flipper-left"></div>
             <div class="flipper right" id="flipper-right"></div>
+            <bumper side="left"></bumper>
+
 
         </div>
 
