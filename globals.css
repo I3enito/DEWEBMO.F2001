@@ -63,3 +63,11 @@ div.ground {
   top: 200px;
   left: 80px;
 }
+
+.ball {
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+}

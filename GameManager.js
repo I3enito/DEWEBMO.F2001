@@ -1,5 +1,7 @@
 // import { Ball } from "./Ball";
 
+const gravity = -0.01;
+
 class GameManager {
   constructor() {
     this.gameHasStarted = false;
@@ -8,7 +10,7 @@ class GameManager {
   }
 
   setupGame = () => {
-    this.registerGameElement(new Ball(50, 50, 2, 2, 10, "ball"));
+    this.registerGameElement(new Ball(500, 500, -2, 10, "ball"));
   };
 
   startGame = () => {
@@ -31,7 +33,19 @@ class GameManager {
     }
 
     this.gameElements.forEach((gameElement) => {
-      gameElement.calcNextPosition();
+      const nextPosX = gameElement.getNextPositionX();
+      const nextPosY = gameElement.getNextPositionY(gravity);
+
+      if (nextPosX < 0 || nextPosX > 1000) {
+        gameElement.speedX *= -0.8;
+        gameElement.gravitySpeed = 0;
+      }
+      if (nextPosY < 0) {
+        gameElement.speedY *= -0.4;
+        gameElement.gravitySpeed = 0;
+      }
+
+      gameElement.updatePosition(gravity);
     });
 
     this.gameElements.forEach((gameElement) => {
