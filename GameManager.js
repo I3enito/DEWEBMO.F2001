@@ -1,8 +1,3 @@
-// import { Ball } from "./Ball";
-
-import { Line } from "./Line.js";
-import Victor from "./victor";
-
 const gravity = 9.81;
 let secondsPassed;
 let oldTimeStamp;
@@ -39,19 +34,19 @@ class GameManager {
     console.log("drawing");
 
     this.gameElements.forEach((gameElement) => {
-      const nextPosX = gameElement.getNextPositionX();
-      const nextPosY = gameElement.getNextPositionY(gravity, secondsPassed);
+      const nextPosX = gameElement.getNextPositionVector(secondsPassed).x;
+      const nextPosY = gameElement.getNextPositionVector(secondsPassed).y;
+
+      console.log("next pos y:" + nextPosY);
 
       if (nextPosX < 0 || nextPosX > 1000) {
-        gameElement.speedX *= -0.8;
-        gameElement.gravitySpeed = 0;
+        gameElement.speedVector.multiplyScalarX(-0.8);
       }
       if (nextPosY < 0) {
-        gameElement.speedY *= -0.4;
-        gameElement.gravitySpeed = 0;
+        gameElement.speedVector.multiplyScalarY(-0.4);
       }
 
-      gameElement.updatePosition(gravity, secondsPassed);
+      gameElement.updatePosition(secondsPassed);
     });
 
     this.gameElements.forEach((gameElement) => {

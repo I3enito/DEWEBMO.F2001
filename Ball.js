@@ -1,55 +1,54 @@
 const maxSpeed = 100;
 const drag = 0.999;
+const gravityVector = new Victor(0, -9.81);
 
 class Ball {
   constructor(posX, posY, speedX, speedY, htmlId) {
     this.posX = posX;
     this.posY = posY;
+
+    this.positionVector = new Victor(posX, posY);
+
+    this.speedVector = new Victor(speedX, speedY);
+
     this.speedX = speedX;
     this.speedY = speedY;
     this.gravitySpeed = 0;
     this.element = document.getElementById(htmlId);
   }
 
-  getNextSpeedX = () => {
-    return this.speedX;
+  getNextSpeedVector = (secondsPassed) => {
+    return this.speedVector
+      .clone()
+      .add(gravityVector.clone().multiplyScalar(secondsPassed));
   };
 
-  getNextSpeedY = (gravity, secondsPassed) => {
-    if (Math.abs(this.speedY) < maxSpeed) {
-      return this.speedY + gravity * secondsPassed;
-    }
-    return this.speedY;
+  getNextPositionVector = (secondsPassed) => {
+    return this.positionVector
+      .clone()
+      .add(this.getNextSpeedVector(secondsPassed));
   };
 
-  getNextPositionX = () => {
-    return this.posX + this.getNextSpeedX() * secondsPassed;
-  };
-
-  getNextPositionY = (gravity, secondsPassed) => {
-    return (
-      this.posY + this.getNextSpeedY(gravity, secondsPassed) * secondsPassed
-    );
-  };
-
-  updateSpeed = (gravity, secondsPassed) => {
+  updateSpeed = (secondsPassed) => {
     // this.speedX *= drag;
 
-    if (Math.abs(this.speedY) < maxSpeed) {
-      this.speedY -= gravity * secondsPassed;
-    }
+    this.speedVector.add(gravityVector.clone().multiplyScalar(secondsPassed));
+    console.log("Speed vector y: " + this.speedVector.y);
+
+    // this.speedY -= gravity * secondsPassed;
   };
 
-  updatePosition = (gravity, secondsPassed) => {
-    console.log(this.speedY);
-    this.updateSpeed(gravity, secondsPassed);
+  updatePosition = (secondsPassed) => {
+    this.updateSpeed(secondsPassed);
 
-    this.posX += this.speedX * secondsPassed;
-    this.posY += this.speedY * secondsPassed;
+    this.positionVector.add(this.speedVector.clone().multiplyScalar(secondsPassed));
+
+    // this.posX += this.speedVector.x * secondsPassed;
+    // this.posY += this.speedVector.y * secondsPassed;
   };
 
   drawElement = () => {
-    this.element.style.left = this.posX;
-    this.element.style.bottom = this.posY;
+    this.element.style.left = this.positionVector.x;
+    this.element.style.bottom = this.positionVector.y;
   };
 }
