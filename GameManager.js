@@ -10,7 +10,18 @@ class GameManager {
     this.gameElements = [];
     this.tableElement = document.getElementById("ground");
 
-    new Line(this.tableElement, new Victor(0, 0), new Victor(0, 1000));
+    new Line(
+      this.tableElement,
+      new Victor(100, 500),
+      new Victor(500, 550),
+      "line"
+    );
+
+    this.simpleLine = new SimpleLine(
+      new Victor(100, 100),
+      new Victor(600, 200)
+    );
+    this.collisionPoint = new Ball(500, 500, -10, 10, "collisionPoint");
   }
 
   setupGame = () => {
@@ -36,6 +47,21 @@ class GameManager {
     this.gameElements.forEach((gameElement) => {
       const nextPosX = gameElement.getNextPositionVector(secondsPassed).x;
       const nextPosY = gameElement.getNextPositionVector(secondsPassed).y;
+
+      // console.log(
+      //   "projetion distanz:  " +
+      //     this.simpleLine.getProjectionDistance(
+      //       gameElement.getNextPositionVector(secondsPassed)
+      //     )
+      // );
+
+      if (
+        this.simpleLine.getProjectionDistance(
+          gameElement.getNextPositionVector(secondsPassed)
+        ) < 10
+      ) {
+        gameElement.speedVector.multiplyScalarY(-0.4);
+      }
 
       console.log("next pos y:" + nextPosY);
 

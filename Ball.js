@@ -26,7 +26,9 @@ class Ball {
   getNextPositionVector = (secondsPassed) => {
     return this.positionVector
       .clone()
-      .add(this.getNextSpeedVector(secondsPassed));
+      .add(
+        this.getNextSpeedVector(secondsPassed).multiplyScalar(secondsPassed)
+      );
   };
 
   updateSpeed = (secondsPassed) => {
@@ -41,7 +43,9 @@ class Ball {
   updatePosition = (secondsPassed) => {
     this.updateSpeed(secondsPassed);
 
-    this.positionVector.add(this.speedVector.clone().multiplyScalar(secondsPassed));
+    this.positionVector.add(
+      this.speedVector.clone().multiplyScalar(secondsPassed)
+    );
 
     // this.posX += this.speedVector.x * secondsPassed;
     // this.posY += this.speedVector.y * secondsPassed;

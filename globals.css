@@ -1,4 +1,3 @@
-
 div.ground {
   position: relative;
   width: 1000px;
@@ -70,4 +69,15 @@ div.ground {
   width: 10px;
   height: 10px;
   background-color: red;
+}
+
+/* .line {
+  height: 1px;
+  background-color: black;
+} */
+
+.simpleLine {
+  height: 1px;
+  background-color: black;
+  position: absolute;
 }
