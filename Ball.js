@@ -1,4 +1,5 @@
-const maxSpeed = 20;
+const maxSpeed = 100;
+const drag = 0.999;
 
 class Ball {
   constructor(posX, posY, speedX, speedY, htmlId) {
@@ -14,40 +15,37 @@ class Ball {
     return this.speedX;
   };
 
-  getNextSpeedY = (gravity) => {
+  getNextSpeedY = (gravity, secondsPassed) => {
     if (Math.abs(this.speedY) < maxSpeed) {
-      return this.speedY + this.gravitySpeed + gravity;
+      return this.speedY + gravity * secondsPassed;
     }
     return this.speedY;
   };
 
   getNextPositionX = () => {
-    return this.posX + this.getNextSpeedX();
+    return this.posX + this.getNextSpeedX() * secondsPassed;
   };
 
-  getNextPositionY = (gravity) => {
-    return this.posY + this.getNextSpeedY(gravity);
+  getNextPositionY = (gravity, secondsPassed) => {
+    return (
+      this.posY + this.getNextSpeedY(gravity, secondsPassed) * secondsPassed
+    );
   };
 
-  updateGravitySpeed = (gravity) => {
-    this.gravitySpeed += gravity;
-  };
+  updateSpeed = (gravity, secondsPassed) => {
+    // this.speedX *= drag;
 
-  updateSpeed = () => {
     if (Math.abs(this.speedY) < maxSpeed) {
-      this.speedY += this.gravitySpeed;
+      this.speedY -= gravity * secondsPassed;
     }
   };
 
-  updatePosition = (gravity) => {
+  updatePosition = (gravity, secondsPassed) => {
+    console.log(this.speedY);
+    this.updateSpeed(gravity, secondsPassed);
 
-    this.posX += this.speedX;
-    this.posY += this.speedY;
-
-    this.updateGravitySpeed(gravity);
-    this.updateSpeed();
-
-    console.log(this.gravitySpeed);
+    this.posX += this.speedX * secondsPassed;
+    this.posY += this.speedY * secondsPassed;
   };
 
   drawElement = () => {
