@@ -12,14 +12,16 @@ class SimpleLine {
     this.divElement.style.bottom = this.ortsVektor.y;
     this.divElement.style.left = this.ortsVektor.x;
 
-    this.divElement.style.transform = `rotateZ(-${this.richtungsVektor.horizontalAngleDeg()}deg)`;
+    this.divElement.style.transform = `rotateZ(${
+      this.richtungsVektor.horizontalAngleDeg() * -1
+    }deg)`;
 
     this.divElement.classList.add("simpleLine");
 
     document.getElementById("ground").appendChild(this.divElement);
   }
 
-  getProjectionDistance = (projektionsPunkt) => {
+  getProjectionDistance = (projektionsPunkt, collisionPointElement) => {
     const projektionAufRichtungsVektor = this.richtungsVektor
       .clone()
       .multiplyScalar(
@@ -27,10 +29,23 @@ class SimpleLine {
           this.richtungsVektor.clone().lengthSq()
       );
 
+    const projektionVonOrtsVektorAufRichtungsVektor = this.richtungsVektor
+      .clone()
+      .multiplyScalar(
+        this.richtungsVektor.clone().dot(this.ortsVektor) /
+          this.richtungsVektor.clone().lengthSq()
+      );
+
+    const collisionPoint = projektionAufRichtungsVektor
+      .clone()
+      .add(this.ortsVektor)
+      .subtract(projektionVonOrtsVektorAufRichtungsVektor);
+
     const distanzZwischenBeidenPunkten = projektionsPunkt.distance(
-      //   this.ortsVektor.clone().add(projektionAufRichtungsVektor)
-      projektionAufRichtungsVektor.clone().addY(this.ortsVektor)
+      collisionPoint
     );
+
+    collisionPointElement.updatePosition(collisionPoint);
 
     return distanzZwischenBeidenPunkten;
   };

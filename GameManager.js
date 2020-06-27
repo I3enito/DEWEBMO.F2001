@@ -18,14 +18,14 @@ class GameManager {
     );
 
     this.simpleLine = new SimpleLine(
-      new Victor(100, 100),
-      new Victor(600, 200)
+      new Victor(100, 200),
+      new Victor(600, 100)
     );
-    this.collisionPoint = new Ball(500, 500, -10, 10, "collisionPoint");
   }
 
   setupGame = () => {
     this.registerGameElement(new Ball(500, 500, -10, 10, "ball"));
+    this.collisionPoint = new CollisionPoint("collisionPoint");
   };
 
   startGame = () => {
@@ -57,10 +57,24 @@ class GameManager {
 
       if (
         this.simpleLine.getProjectionDistance(
-          gameElement.getNextPositionVector(secondsPassed)
+          gameElement.getNextPositionVector(secondsPassed),
+          this.collisionPoint
         ) < 10
       ) {
-        gameElement.speedVector.multiplyScalarY(-0.4);
+        const simpleLineNormalenWinkel =
+          this.simpleLine.richtungsVektor
+            .clone()
+            .rotateDeg(90)
+            .horizontalAngleDeg() % 180;
+
+        const ballZuNormalenWinkel =
+          simpleLineNormalenWinkel -
+          (gameElement.speedVector.clone().horizontalAngleDeg() + 180);
+
+        gameElement.speedVector
+          .invert()
+          .rotateDeg(ballZuNormalenWinkel)
+          .multiplyScalar(0.9);
       }
 
       console.log("next pos y:" + nextPosY);

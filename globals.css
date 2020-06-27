@@ -71,6 +71,14 @@ div.ground {
   background-color: red;
 }
 
+.collisionPoint {
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: violet;
+}
+
 /* .line {
   height: 1px;
   background-color: black;
@@ -80,4 +88,5 @@ div.ground {
   height: 1px;
   background-color: black;
   position: absolute;
+  transform-origin: bottom left;
 }
