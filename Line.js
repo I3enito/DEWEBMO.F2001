@@ -1,6 +1,6 @@
 import { CollisionLine } from "./CollisionDetection.mjs";
 
-export class Line {
+class Line {
   constructor(parent, a, b, cssClass) {
     this._collisionShape = new CollisionLine(this, a, b);
     this.bounciness = 1.0;

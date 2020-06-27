@@ -1,6 +1,6 @@
 // import { Ball } from "./Ball";
 
-import { Line } from "./sadsad.js";
+import { Line } from "./Line.js";
 import Victor from "./victor";
 
 const gravity = 9.81;
