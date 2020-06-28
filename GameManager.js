@@ -12,7 +12,12 @@ class GameManager {
   }
 
   setupGame = () => {
-    this.ball = new Ball(800, 800, -40, 6, "ball");
+    this.ball = new Ball(800, 800, -40, 50, "ball");
+
+    this.simpleBumpers = [
+      new SimpleBumber(new Victor(500, 200), 20, "simpleBumber"),
+      new SimpleBumber(new Victor(500, 700), 70, "simpleBumber2"),
+    ];
 
     this.simpleLines = [
       new SimpleLine(new Victor(0, 300), new Victor(370, 100), "simpleLine1"),
@@ -29,15 +34,15 @@ class GameManager {
 
     this.simpleFlippers = [
       new SimpleFlipper(
-        new Victor(370, 110),
-        new Victor(450, 50),
+        new Victor(370, 100),
+        new Victor(480, 50),
         "simpleBumberLeft",
         37,
         false
       ),
       new SimpleFlipper(
-        new Victor(640, 110),
-        new Victor(550, 50),
+        new Victor(630, 100),
+        new Victor(520, 50),
         "simpleBumberRight",
         39,
         true
@@ -83,6 +88,25 @@ class GameManager {
           .invert()
           .rotateDeg(2 * ballZuNormalenWinkel)
           .multiplyScalar(simpleLine.bouncyNessFactor);
+      }
+    });
+
+    this.simpleBumpers.forEach((simpleBumber) => {
+      if (simpleBumber.getProjectionDistance(nextPositionVectorOfBall) < 10) {
+        const bumberNormalenWinkel =
+          simpleBumber.ortsVektor
+            .clone()
+            .subtract(nextPositionVectorOfBall)
+            .horizontalAngleDeg() + 180;
+
+        const ballZuNormalenWinkel =
+          bumberNormalenWinkel -
+          (this.ball.speedVector.clone().horizontalAngleDeg() + 180);
+
+        this.ball.speedVector
+          .invert()
+          .rotateDeg(2 * ballZuNormalenWinkel)
+          .multiplyScalar(simpleBumber.bouncyNessFactor);
       }
     });
 

@@ -91,9 +91,14 @@ div.ground {
   transform-origin: top left;
 }
 
-.simpleBumber {
+.simpleFlipper {
   height: 5px;
   background-color: green;
   position: absolute;
   transform-origin: top left;
+}
+
+.simpleBumber {
+  background-color: blue;
+  position: absolute;
 }

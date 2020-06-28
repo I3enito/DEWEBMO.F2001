@@ -5,7 +5,7 @@ class SimpleFlipper {
     this.htmlId = htmlId;
     this.keyCode = keyCode;
 
-    this.bouncyNessFactor = 1;
+    this.bouncyNessFactor = 1.2;
 
     this.rotationFactor = isRotationInversed ? -1 : 1;
 
@@ -27,7 +27,7 @@ class SimpleFlipper {
       this.richtungsVektor.horizontalAngleDeg() * -1
     }deg)`;
 
-    this.divElement.classList.add("simpleBumber");
+    this.divElement.classList.add("simpleFlipper");
     this.divElement.id = htmlId;
 
     document.getElementById("ground").appendChild(this.divElement);
@@ -50,7 +50,7 @@ class SimpleFlipper {
 
     if (keyCode === this.keyCode) {
       this.keyPressed = false;
-      this.bouncyNessFactor = 1;
+      this.bouncyNessFactor = 1.2;
     }
   };
 

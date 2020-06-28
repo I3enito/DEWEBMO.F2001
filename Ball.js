@@ -18,9 +18,12 @@ class Ball {
   }
 
   getNextSpeedVector = (secondsPassed) => {
-    return this.speedVector
-      .clone()
-      .add(gravityVector.clone().multiplyScalar(secondsPassed * 60));
+    const speedVectorLength = this.speedVector.length();
+    console.log(speedVectorLength);
+    return this.speedVector.clone().add(
+      gravityVector.clone().multiplyScalar(secondsPassed * 60)
+      .multiplyScalar(speedVectorLength > 500 ? 0.9 : 1)
+    );
   };
 
   getNextPositionVector = (secondsPassed) => {
@@ -33,19 +36,16 @@ class Ball {
 
   updateSpeed = (secondsPassed) => {
     // this.speedX *= drag;
+    const nextSpeedVector = this.getNextSpeedVector(secondsPassed);
 
-    this.speedVector.add(
-      gravityVector.clone().multiplyScalar(secondsPassed * 60)
-    );
-    // console.log("Speed vector y: " + this.speedVector.y);
-
-    // this.speedY -= gravity * secondsPassed;
+    this.speedVector = nextSpeedVector;
   };
 
   updatePosition = (secondsPassed) => {
     this.positionVector.add(
       this.speedVector.clone().multiplyScalar(secondsPassed)
     );
+
     this.updateSpeed(secondsPassed);
 
     // this.posX += this.speedVector.x * secondsPassed;
