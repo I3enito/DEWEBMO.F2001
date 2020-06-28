@@ -8,29 +8,37 @@ class GameManager {
     this.gameHasFinished = false;
     this.gameElements = [];
     this.tableElement = document.getElementById("ground");
+
+    this.startButton = document.getElementById("startButton");
+    this.startButton.addEventListener("click", () => this.setupGame());
   }
 
   setupGame = () => {
+    this.startButton.classList.add("inactive");
+
     this.ball = new Ball(new Victor(800, 800), new Victor(-40, 50), 5);
 
     this.simpleBumpers = [
       new SimpleBumber(new Victor(500, 200), 20),
       new SimpleBumber(new Victor(500, 700), 70),
+      new SimpleBumber(new Victor(150, 500), 50),
     ];
 
     this.simpleLines = [
       new SimpleLine(new Victor(0, 300), new Victor(370, 100)),
       new SimpleLine(new Victor(630, 100), new Victor(1000, 300)),
-      // new SimpleLine(new Victor(100, 500), new Victor(300, 400)),
       new SimpleLine(new Victor(600, 400), new Victor(700, 700)),
       new SimpleLine(new Victor(300, 700), new Victor(400, 400)),
-      // new SimpleLine(new Victor(600, 100), new Victor(100, 300), "simpleLine4"),
+      new SimpleLine(new Victor(200, 800), new Victor(600, 900)),
+      new SimpleLine(new Victor(800, 500), new Victor(900, 400)),
     ];
 
     this.simpleFlippers = [
-      new SimpleFlipper(new Victor(370, 100), new Victor(480, 50), 37, false),
-      new SimpleFlipper(new Victor(630, 100), new Victor(520, 50), 39, true),
+      new SimpleFlipper(new Victor(370, 100), new Victor(460, 50), 37, false),
+      new SimpleFlipper(new Victor(630, 100), new Victor(540, 50), 39, true),
     ];
+
+    this.startGame();
   };
 
   startGame = () => {
@@ -71,6 +79,7 @@ class GameManager {
           .invert()
           .rotateDeg(2 * ballZuNormalenWinkel)
           .multiplyScalar(simpleLine.bouncyNessFactor);
+        simpleLine.triggerAnimation();
       }
     });
 
@@ -90,6 +99,7 @@ class GameManager {
           .invert()
           .rotateDeg(2 * ballZuNormalenWinkel)
           .multiplyScalar(simpleBumber.bouncyNessFactor);
+        simpleBumber.triggerAnimation();
       }
     });
 

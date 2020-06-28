@@ -5,7 +5,7 @@ class SimpleBumber {
     this.radius = radius;
     const width = 2 * radius;
 
-    this.bouncyNessFactor = 1.5;
+    this.bouncyNessFactor = 1.3;
 
     this.ownCollisionPoint = new CollisionPoint();
 
@@ -28,6 +28,16 @@ class SimpleBumber {
 
     document.getElementById("ground").appendChild(this.divElement);
   }
+
+  triggerAnimation = () => {
+    this.divElement.animate(
+      {
+        transform: ["scale(1)", "scale(1.2)", "scale(1)"], // offset: 0, 0.5, 1
+        iterations: 1,
+      },
+      100
+    );
+  };
 
   getProjectionDistance = (projektionsPunkt) => {
     const verbindungsVektorZwischenPunkten = this.ortsVektor

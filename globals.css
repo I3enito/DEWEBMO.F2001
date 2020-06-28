@@ -57,7 +57,43 @@ div.ground {
 .simpleBumber {
   box-sizing: border-box;
 
+  transition: all ease 1s;
+
   position: absolute;
 
   background: linear-gradient(145deg, #c4d3db, #a5b1b9);
+
+}
+
+.startButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  display: block;
+  height: 50px;
+  color: #f7ffff;
+  border: none;
+
+  border-radius: 20px;
+  background: linear-gradient(145deg, #a5b1b9, #c4d3db);
+  box-shadow: 11px 11px 22px #798287, -11px -11px 22px #f5ffff;
+
+  transition: all ease 1s;
+
+  outline: none;
+
+  cursor: pointer;
+}
+
+.startButton:hover {
+  color: #c4d3db;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #a5b1b9, #c4d3db);
+  box-shadow: 11px 11px 60px #798287, -11px -11px 60px #f5ffff;
+}
+
+.startButton.inactive {
+  display: none;
 }

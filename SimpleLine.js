@@ -25,6 +25,16 @@ class SimpleLine {
     document.getElementById("ground").appendChild(this.divElement);
   }
 
+  triggerAnimation = () => {
+    this.divElement.animate(
+      {
+        backgroundColor: ["#b7bec2", "#fe5660", "#b7bec2"], // offset: 0, 0.5, 1
+        iterations: 1,
+      },
+      100
+    );
+  };
+
   getProjectionDistance = (projektionsPunkt) => {
     const projektionAufRichtungsVektor = this.richtungsVektor
       .clone()

@@ -56,6 +56,8 @@ class SimpleFlipper {
     }
   };
 
+  triggerAnimation = () => {};
+
   getProjectionDistance = (projektionsPunkt) => {
     const projektionAufRichtungsVektor = this.richtungsVektor
       .clone()
