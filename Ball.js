@@ -1,20 +1,18 @@
-const maxSpeed = 100;
-const drag = 0.999;
 const gravityVector = new Victor(0, -9.81);
 
 class Ball {
-  constructor(posX, posY, speedX, speedY, htmlId) {
-    this.posX = posX;
-    this.posY = posY;
+  constructor(positionVector, speedVector, radius) {
+    this.positionVector = positionVector;
+    this.speedVector = speedVector;
+    this.radius = radius;
+    this.width = 2 * radius;
 
-    this.positionVector = new Victor(posX, posY);
+    this.element = document.createElement("div");
+    document.getElementById("ground").appendChild(this.element);
+    this.element.classList.add("ball");
 
-    this.speedVector = new Victor(speedX, speedY);
-
-    this.speedX = speedX;
-    this.speedY = speedY;
-    this.gravitySpeed = 0;
-    this.element = document.getElementById(htmlId);
+    this.element.style.width = this.width;
+    this.element.style.height = this.width;
   }
 
   getNextSpeedVector = (secondsPassed) => {
@@ -31,31 +29,23 @@ class Ball {
   getNextPositionVector = (secondsPassed) => {
     return this.positionVector
       .clone()
-      .add(
-        this.getNextSpeedVector(secondsPassed).multiplyScalar(secondsPassed)
-      );
+      .add(this.speedVector.clone().multiplyScalar(secondsPassed));
   };
 
   updateSpeed = (secondsPassed) => {
-    // this.speedX *= drag;
     const nextSpeedVector = this.getNextSpeedVector(secondsPassed);
 
     this.speedVector = nextSpeedVector;
   };
 
   updatePosition = (secondsPassed) => {
-    this.positionVector.add(
-      this.speedVector.clone().multiplyScalar(secondsPassed)
-    );
+    this.positionVector = this.getNextPositionVector(secondsPassed);
 
     this.updateSpeed(secondsPassed);
-
-    // this.posX += this.speedVector.x * secondsPassed;
-    // this.posY += this.speedVector.y * secondsPassed;
   };
 
   drawElement = () => {
-    this.element.style.left = this.positionVector.x - 5;
-    this.element.style.bottom = this.positionVector.y - 5;
+    this.element.style.left = this.positionVector.x - this.radius;
+    this.element.style.bottom = this.positionVector.y - this.radius;
   };
 }

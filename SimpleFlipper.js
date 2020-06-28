@@ -1,8 +1,7 @@
 class SimpleFlipper {
-  constructor(pointA, pointB, htmlId, keyCode, isRotationInversed) {
+  constructor(pointA, pointB, keyCode, isRotationInversed) {
     this.pointA = pointA;
     this.pointB = pointB;
-    this.htmlId = htmlId;
     this.keyCode = keyCode;
 
     this.bouncyNessFactor = 1.2;
@@ -32,7 +31,6 @@ class SimpleFlipper {
     if (isRotationInversed) {
       this.divElement.classList.add("right");
     }
-    this.divElement.id = htmlId;
 
     document.getElementById("ground").appendChild(this.divElement);
 

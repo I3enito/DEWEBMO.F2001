@@ -6,68 +6,9 @@ div.ground {
   background: #b7c5cd;
 }
 
-.flipper-container {
-  position: absolute;
-  bottom: 100px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  width: 300px;
-  justify-content: space-between;
-}
-
-.flipper {
-  position: absolute;
-  background-size: 100px 40px;
-  width: 100px;
-  height: 40px;
-}
-
-.flipper.left {
-  top: 0;
-  left: 10px;
-  background-image: url("https://exorciser.ch/_media/pub/flipper-left.png");
-  transform-origin: 18% 50%;
-  transform: rotateZ(32deg);
-}
-
-.flipper.right {
-  top: 0;
-  right: 10px;
-  background-image: url("https://exorciser.ch/_media/pub/flipper-right.png");
-  transform-origin: 82% 50%;
-  transform: rotateZ(-32deg);
-}
-
-#bumper {
-  background-color: green;
-  border-radius: 50%;
-
-  /* Position */
-  position: absolute;
-  top: 20px;
-  left: 100px;
-  width: 60px;
-  height: 60px;
-
-  /* Text Attributes */
-  text-align: center;
-  line-height: 60px;
-  color: greenyellow;
-  font-weight: bold;
-}
-
-#instruction {
-  position: absolute;
-  top: 200px;
-  left: 80px;
-}
-
 .ball {
   position: absolute;
   display: block;
-  width: 10px;
-  height: 10px;
 
   border-radius: 50px;
   background: linear-gradient(145deg, #fe5660, #d54851);
@@ -86,11 +27,6 @@ div.ground {
   background: linear-gradient(145deg, #a5b1b9, #c4d3db);
   box-shadow: 1px 1px 2px #808a90, -1px -1px 2px #eeffff;
 }
-
-/* .line {
-  height: 1px;
-  background-color: black;
-} */
 
 .simpleLine {
   height: 2px;

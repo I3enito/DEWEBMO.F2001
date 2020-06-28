@@ -1,4 +1,3 @@
-const gravity = 9.81;
 let secondsPassed;
 let oldTimeStamp;
 let fps;
@@ -12,41 +11,25 @@ class GameManager {
   }
 
   setupGame = () => {
-    this.ball = new Ball(800, 800, -40, 50, "ball");
+    this.ball = new Ball(new Victor(800, 800), new Victor(-40, 50), 5);
 
     this.simpleBumpers = [
-      new SimpleBumber(new Victor(500, 200), 20, "simpleBumber"),
-      new SimpleBumber(new Victor(500, 700), 70, "simpleBumber2"),
+      new SimpleBumber(new Victor(500, 200), 20),
+      new SimpleBumber(new Victor(500, 700), 70),
     ];
 
     this.simpleLines = [
-      new SimpleLine(new Victor(0, 300), new Victor(370, 100), "simpleLine1"),
-      new SimpleLine(
-        new Victor(630, 100),
-        new Victor(1000, 300),
-        "simpleLine2"
-      ),
+      new SimpleLine(new Victor(0, 300), new Victor(370, 100)),
+      new SimpleLine(new Victor(630, 100), new Victor(1000, 300)),
       // new SimpleLine(new Victor(100, 500), new Victor(300, 400)),
-      new SimpleLine(new Victor(600, 400), new Victor(700, 700), "simpleLine3"),
-      new SimpleLine(new Victor(300, 700), new Victor(400, 400), "simpleLine3"),
+      new SimpleLine(new Victor(600, 400), new Victor(700, 700)),
+      new SimpleLine(new Victor(300, 700), new Victor(400, 400)),
       // new SimpleLine(new Victor(600, 100), new Victor(100, 300), "simpleLine4"),
     ];
 
     this.simpleFlippers = [
-      new SimpleFlipper(
-        new Victor(370, 100),
-        new Victor(480, 50),
-        "simpleBumberLeft",
-        37,
-        false
-      ),
-      new SimpleFlipper(
-        new Victor(630, 100),
-        new Victor(520, 50),
-        "simpleBumberRight",
-        39,
-        true
-      ),
+      new SimpleFlipper(new Victor(370, 100), new Victor(480, 50), 37, false),
+      new SimpleFlipper(new Victor(630, 100), new Victor(520, 50), 39, true),
     ];
   };
 

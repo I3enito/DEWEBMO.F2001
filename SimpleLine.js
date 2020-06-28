@@ -1,12 +1,11 @@
 class SimpleLine {
-  constructor(pointA, pointB, htmlId) {
+  constructor(pointA, pointB) {
     this.pointA = pointA;
     this.pointB = pointB;
-    this.htmlId = htmlId;
 
     this.bouncyNessFactor = 0.9;
 
-    this.ownCollisionPoint = new CollisionPoint("collisionPoint");
+    this.ownCollisionPoint = new CollisionPoint();
 
     this.ortsVektor = pointA.clone();
     this.richtungsVektor = pointB.clone().subtract(pointA);
@@ -22,7 +21,6 @@ class SimpleLine {
     }deg)`;
 
     this.divElement.classList.add("simpleLine");
-    this.divElement.id = htmlId;
 
     document.getElementById("ground").appendChild(this.divElement);
   }
