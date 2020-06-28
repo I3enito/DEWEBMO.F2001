@@ -141,3 +141,12 @@ div.ground {
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
+
+.heading {
+  text-align: center;
+  padding: 100px 0;
+
+  color: #c4d3db;
+  position: relative;
+  font-size: 100px;
+}

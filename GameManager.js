@@ -55,6 +55,12 @@ class GameManager {
       new SimpleBumber(new Victor(500, 200), 20, 10),
       new SimpleBumber(new Victor(500, 700), 70, 50),
       new SimpleBumber(new Victor(150, 500), 50, 10),
+
+      new SimpleBumber(new Victor(850, 1100), 40, 10),
+      new SimpleBumber(new Victor(650, 1200), 40, 10),
+      new SimpleBumber(new Victor(450, 1350), 40, 10),
+
+      new SimpleBumber(new Victor(400, 1900), 150, 100),
     ];
 
     this.simpleLines = [
@@ -64,6 +70,18 @@ class GameManager {
       new SimpleLine(new Victor(300, 700), new Victor(400, 400)),
       new SimpleLine(new Victor(200, 800), new Victor(600, 900)),
       new SimpleLine(new Victor(800, 500), new Victor(900, 400)),
+
+      new SimpleLine(new Victor(50, 1400), new Victor(400, 1100)),
+
+      new SimpleLine(new Victor(150, 1700), new Victor(300, 1650)),
+
+      new SimpleLine(new Victor(450, 1600), new Victor(600, 1650)),
+
+      new SimpleLine(new Victor(550, 1400), new Victor(700, 1350)),
+
+      new SimpleLine(new Victor(850, 1600), new Victor(750, 1900)),
+
+
     ];
 
     this.simpleFlippers = [
@@ -190,7 +208,7 @@ class GameManager {
         this.ball.positionVector.y -
         (window.scrollY + window.innerHeight / 2);
       window.scrollBy({
-        top: difference / 2,
+        top: difference * 0.9,
         left: 0,
         behavior: "smooth",
       });
