@@ -201,7 +201,7 @@ ball.anim.onfinish = () => {
     for (let i = 0, len = allCollisionObjects.length; i < len; i++) {
         let obj = allCollisionObjects[i];
         if (obj.detect(ball)) {
-            console.log('Kollision', obj.id);
+            // console.log('Kollision', obj.id);
             obj.respond(ball);
         }
     }

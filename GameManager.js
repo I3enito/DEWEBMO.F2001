@@ -17,15 +17,21 @@ class GameManager {
       "line"
     );
 
-    this.simpleLine = new SimpleLine(
-      new Victor(100, 200),
-      new Victor(600, 100)
-    );
+    // this.simpleLine = new SimpleLine(
+    //   new Victor(100, 100),
+    //   new Victor(600, 300)
+    // );
   }
 
   setupGame = () => {
-    this.registerGameElement(new Ball(500, 500, -10, 10, "ball"));
-    this.collisionPoint = new CollisionPoint("collisionPoint");
+    this.registerGameElement(new Ball(800, 800, -10, 10, "ball"));
+    this.simpleLines = [
+      new SimpleLine(new Victor(100, 100), new Victor(300, 200), "simpleLine1"),
+      new SimpleLine(new Victor(300, 300), new Victor(600, 200), "simpleLine2"),
+      // new SimpleLine(new Victor(100, 500), new Victor(300, 400)),
+      new SimpleLine(new Victor(600, 400), new Victor(900, 900), "simpleLine3"),
+      new SimpleLine(new Victor(100, 600), new Victor(600, 300), "simpleLine4"),
+    ];
   };
 
   startGame = () => {
@@ -42,7 +48,7 @@ class GameManager {
   };
 
   draw = (secondsPassed) => {
-    console.log("drawing");
+    // console.log("drawing");
 
     this.gameElements.forEach((gameElement) => {
       const nextPosX = gameElement.getNextPositionVector(secondsPassed).x;
@@ -55,35 +61,36 @@ class GameManager {
       //     )
       // );
 
-      if (
-        this.simpleLine.getProjectionDistance(
-          gameElement.getNextPositionVector(secondsPassed),
-          this.collisionPoint
-        ) < 10
-      ) {
-        const simpleLineNormalenWinkel =
-          this.simpleLine.richtungsVektor
-            .clone()
-            .rotateDeg(90)
-            .horizontalAngleDeg() % 180;
+      this.simpleLines.forEach((simpleLine) => {
+        if (
+          simpleLine.getProjectionDistance(
+            gameElement.getNextPositionVector(secondsPassed)
+          ) < 10
+        ) {
+          const simpleLineNormalenWinkel =
+            simpleLine.richtungsVektor
+              .clone()
+              .rotateDeg(90)
+              .horizontalAngleDeg() % 180;
 
-        const ballZuNormalenWinkel =
-          simpleLineNormalenWinkel -
-          (gameElement.speedVector.clone().horizontalAngleDeg() + 180);
+          const ballZuNormalenWinkel =
+            simpleLineNormalenWinkel -
+            (gameElement.speedVector.clone().horizontalAngleDeg() + 180);
 
-        gameElement.speedVector
-          .invert()
-          .rotateDeg(ballZuNormalenWinkel)
-          .multiplyScalar(0.9);
-      }
+          gameElement.speedVector
+            .invert()
+            .rotateDeg(2 * ballZuNormalenWinkel)
+            .multiplyScalar(1.2);
+        }
+      });
 
-      console.log("next pos y:" + nextPosY);
+      // console.log("next pos y:" + nextPosY);
 
       if (nextPosX < 0 || nextPosX > 1000) {
         gameElement.speedVector.multiplyScalarX(-0.8);
       }
       if (nextPosY < 0) {
-        gameElement.speedVector.multiplyScalarY(-0.4);
+        gameElement.speedVector.multiplyScalarY(-0.9);
       }
 
       gameElement.updatePosition(secondsPassed);
@@ -103,7 +110,7 @@ class GameManager {
     secondsPassed = ((timeStamp - oldTimeStamp) / 1000) * 6;
     oldTimeStamp = timeStamp;
     fps = Math.round(1 / secondsPassed);
-    console.log(fps);
+    // console.log(fps);
 
     this.draw(secondsPassed);
 

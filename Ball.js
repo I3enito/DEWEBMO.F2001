@@ -35,7 +35,7 @@ class Ball {
     // this.speedX *= drag;
 
     this.speedVector.add(gravityVector.clone().multiplyScalar(secondsPassed));
-    console.log("Speed vector y: " + this.speedVector.y);
+    // console.log("Speed vector y: " + this.speedVector.y);
 
     // this.speedY -= gravity * secondsPassed;
   };

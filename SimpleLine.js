@@ -1,7 +1,10 @@
 class SimpleLine {
-  constructor(pointA, pointB) {
+  constructor(pointA, pointB, htmlId) {
     this.pointA = pointA;
     this.pointB = pointB;
+    this.htmlId = htmlId;
+
+    this.ownCollisionPoint = new CollisionPoint("collisionPoint");
 
     this.ortsVektor = pointA.clone();
     this.richtungsVektor = pointB.clone().subtract(pointA);
@@ -17,11 +20,12 @@ class SimpleLine {
     }deg)`;
 
     this.divElement.classList.add("simpleLine");
+    this.divElement.id = htmlId;
 
     document.getElementById("ground").appendChild(this.divElement);
   }
 
-  getProjectionDistance = (projektionsPunkt, collisionPointElement) => {
+  getProjectionDistance = (projektionsPunkt) => {
     const projektionAufRichtungsVektor = this.richtungsVektor
       .clone()
       .multiplyScalar(
@@ -41,11 +45,18 @@ class SimpleLine {
       .add(this.ortsVektor)
       .subtract(projektionVonOrtsVektorAufRichtungsVektor);
 
+    if (
+      collisionPoint.length() > this.pointB.length() ||
+      collisionPoint.length() < this.pointA.length()
+    ) {
+      return 1000;
+    }
+
     const distanzZwischenBeidenPunkten = projektionsPunkt.distance(
       collisionPoint
     );
 
-    collisionPointElement.updatePosition(collisionPoint);
+    this.ownCollisionPoint.updatePosition(collisionPoint);
 
     return distanzZwischenBeidenPunkten;
   };

@@ -85,8 +85,8 @@ div.ground {
 } */
 
 .simpleLine {
-  height: 1px;
+  height: 5px;
   background-color: black;
   position: absolute;
-  transform-origin: bottom left;
+  transform-origin: top left;
 }
