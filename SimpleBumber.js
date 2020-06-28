@@ -5,7 +5,7 @@ class SimpleBumber {
     this.radius = radius;
     const width = 2 * radius;
 
-    this.bouncyNessFactor = 1.3;
+    this.bouncyNessFactor = 1.4;
 
     this.ownCollisionPoint = new CollisionPoint();
 

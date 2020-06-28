@@ -4,7 +4,7 @@ class SimpleFlipper {
     this.pointB = pointB;
     this.keyCode = keyCode;
 
-    this.bouncyNessFactor = 1.2;
+    this.bouncyNessFactor = 1.1;
 
     this.rotationFactor = isRotationInversed ? -1 : 1;
 
@@ -43,7 +43,7 @@ class SimpleFlipper {
 
     if (keyCode === this.keyCode) {
       this.keyPressed = true;
-      this.bouncyNessFactor = 1.4;
+      this.bouncyNessFactor = 1.5;
     }
   };
 
@@ -52,7 +52,7 @@ class SimpleFlipper {
 
     if (keyCode === this.keyCode) {
       this.keyPressed = false;
-      this.bouncyNessFactor = 1.2;
+      this.bouncyNessFactor = 1.1;
     }
   };
 

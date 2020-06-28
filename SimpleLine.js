@@ -3,7 +3,7 @@ class SimpleLine {
     this.pointA = pointA;
     this.pointB = pointB;
 
-    this.bouncyNessFactor = 0.9;
+    this.bouncyNessFactor = 0.8;
 
     this.ownCollisionPoint = new CollisionPoint();
 
