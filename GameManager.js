@@ -14,6 +14,7 @@ class GameManager {
   }
 
   setupGame = () => {
+    this.gameHasFinished = false;
     this.startButton.classList.add("inactive");
 
     this.ball = new Ball(new Victor(800, 800), new Victor(-40, 50), 5);
@@ -47,7 +48,29 @@ class GameManager {
   };
 
   stopGame = () => {
+    this.simpleBumpers.forEach((simpleBumber) => {
+      simpleBumber.ownCollisionPoint.element.remove();
+      simpleBumber.divElement.remove();
+    });
+
+    this.simpleLines.forEach((simpleLine) => {
+      simpleLine.ownCollisionPoint.element.remove();
+      simpleLine.divElement.remove();
+    });
+
+    this.simpleFlippers.forEach((simpleFlippers) => {
+      simpleFlippers.divElement.remove();
+    });
+
+    this.startButton.classList.remove("inactive");
+
+    this.ball.element.remove();
+
+    document.getElementById("ground").rem;
+
     this.gameHasStarted = false;
+    this.gameHasFinished = true;
+    oldTimeStamp = undefined;
   };
 
   registerGameElement = (gameElement) => {
@@ -107,7 +130,7 @@ class GameManager {
       this.ball.speedVector.multiplyScalarX(-0.5);
     }
     if (nextPositionVectorOfBall.y < 0) {
-      this.ball.speedVector.multiplyScalarY(-0.1);
+      this.stopGame();
     }
 
     this.ball.updatePosition(secondsPassed);
