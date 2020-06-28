@@ -1,13 +1,17 @@
 let secondsPassed;
 let oldTimeStamp;
 let fps;
+let scrollThreshHold = 0;
 
 class GameManager {
   constructor() {
     this.gameHasStarted = false;
     this.gameHasFinished = false;
     this.gameElements = [];
+    this.groundHeight = 4000;
+    this.heightReserve = 200;
     this.tableElement = document.getElementById("ground");
+    document.body.style.height = this.groundHeight;
 
     this.startButton = document.getElementById("startButton");
     this.startButton.addEventListener("click", () => this.setupGame());
@@ -16,6 +20,11 @@ class GameManager {
     this.scoreElement = document.getElementById("scoreNumber");
     this.scoreElement.textContent = `${this.score}`;
     this.scoreLinearGradientMax = 1000;
+    window.scrollTo({
+      top: this.groundHeight - window.innerHeight + this.heightReserve,
+      left: 0,
+      behavior: "smooth",
+    });
   }
 
   updateScore = (newPoints) => {
@@ -173,6 +182,20 @@ class GameManager {
     oldTimeStamp = timeStamp;
     fps = Math.round(1 / secondsPassed);
     this.draw(!secondsPassed ? 0 : secondsPassed);
+
+    if (scrollThreshHold === 0) {
+      const difference =
+        this.groundHeight +
+        this.heightReserve -
+        this.ball.positionVector.y -
+        (window.scrollY + window.innerHeight / 2);
+      window.scrollBy({
+        top: difference / 2,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+    scrollThreshHold = (scrollThreshHold + 1) % 2;
 
     window.requestAnimationFrame(this.gameLoop);
   };
