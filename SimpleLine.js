@@ -45,10 +45,7 @@ class SimpleLine {
       .add(this.ortsVektor)
       .subtract(projektionVonOrtsVektorAufRichtungsVektor);
 
-    if (
-      collisionPoint.length() > this.pointB.length() ||
-      collisionPoint.length() < this.pointA.length()
-    ) {
+    if (collisionPoint.x > this.pointB.x || collisionPoint.x < this.pointA.x) {
       return 1000;
     }
 

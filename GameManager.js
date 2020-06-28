@@ -30,7 +30,7 @@ class GameManager {
       new SimpleLine(new Victor(300, 300), new Victor(600, 200), "simpleLine2"),
       // new SimpleLine(new Victor(100, 500), new Victor(300, 400)),
       new SimpleLine(new Victor(600, 400), new Victor(900, 900), "simpleLine3"),
-      new SimpleLine(new Victor(100, 600), new Victor(600, 300), "simpleLine4"),
+      new SimpleLine(new Victor(100, 700), new Victor(600, 300), "simpleLine4"),
     ];
   };
 
@@ -80,7 +80,7 @@ class GameManager {
           gameElement.speedVector
             .invert()
             .rotateDeg(2 * ballZuNormalenWinkel)
-            .multiplyScalar(1.2);
+            .multiplyScalar(0.9);
         }
       });
 
