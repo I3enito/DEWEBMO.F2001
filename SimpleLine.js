@@ -4,6 +4,7 @@ class SimpleLine {
     this.pointB = pointB;
 
     this.bouncyNessFactor = 0.8;
+    this.pointsPerHit = 1;
 
     this.ownCollisionPoint = new CollisionPoint();
 

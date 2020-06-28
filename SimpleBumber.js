@@ -1,11 +1,13 @@
 class SimpleBumber {
-  constructor(ortsVektor, radius) {
+  constructor(ortsVektor, radius, pointsPerHit) {
     this.ortsVektor = ortsVektor;
 
     this.radius = radius;
     const width = 2 * radius;
 
     this.bouncyNessFactor = 1.4;
+
+    this.pointsPerHit = pointsPerHit;
 
     this.ownCollisionPoint = new CollisionPoint();
 

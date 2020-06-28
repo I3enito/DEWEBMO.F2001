@@ -5,6 +5,7 @@ class SimpleFlipper {
     this.keyCode = keyCode;
 
     this.bouncyNessFactor = 1.1;
+    this.pointsPerHit = 5;
 
     this.rotationFactor = isRotationInversed ? -1 : 1;
 

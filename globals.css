@@ -1,9 +1,21 @@
+body {
+  background: #b7c5cd;
+}
+
+* {
+  font-family: "Orbitron", sans-serif;
+}
+
 div.ground {
   position: relative;
   width: 1000px;
   height: 1000px;
   margin: auto;
   background: #b7c5cd;
+
+  border-radius: 0px;
+  background: #b7c5cd;
+  box-shadow: 100px 100px 200px #757e83, -100px -100px 200px #f9ffff;
 }
 
 .ball {
@@ -62,7 +74,6 @@ div.ground {
   position: absolute;
 
   background: linear-gradient(145deg, #c4d3db, #a5b1b9);
-
 }
 
 .startButton {
@@ -96,4 +107,33 @@ div.ground {
 
 .startButton.inactive {
   display: none;
+}
+
+.scoreHeading {
+  margin: 0;
+
+  color: #c4d3db;
+  bottom: 50px;
+  left: 50px;
+  position: absolute;
+  font-size: 64px;
+}
+
+.scoreNumber {
+  margin: 0;
+
+  color: #c4d3db;
+  bottom: 50px;
+  right: 50px;
+  position: absolute;
+  font-size: 64px;
+
+  background: linear-gradient(
+    61deg,
+    rgba(196, 211, 219, 1) 0%,
+    rgba(254, 86, 96, 1) 100%
+  );
+
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
 }

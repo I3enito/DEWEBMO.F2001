@@ -11,18 +11,41 @@ class GameManager {
 
     this.startButton = document.getElementById("startButton");
     this.startButton.addEventListener("click", () => this.setupGame());
+    this.score = 0;
+
+    this.scoreElement = document.getElementById("scoreNumber");
+    this.scoreElement.textContent = `${this.score}`;
+    this.scoreLinearGradientMax = 1000;
   }
+
+  updateScore = (newPoints) => {
+    this.score += newPoints;
+    this.scoreElement.textContent = `${this.score}`;
+    this.scoreElement.style.background = `linear-gradient(
+      61deg,
+      rgba(196, 211, 219, 1) 0%,
+      rgba(${196 + (this.score * 58) / this.scoreLinearGradientMax}, ${
+      196 + (this.score * -125) / this.scoreLinearGradientMax
+    }, ${196 + (this.score * -123) / this.scoreLinearGradientMax}, 1) 100%
+    )`;
+  };
 
   setupGame = () => {
     this.gameHasFinished = false;
     this.startButton.classList.add("inactive");
+    this.score = 0;
+    this.updateScore(0);
 
-    this.ball = new Ball(new Victor(800, 800), new Victor(-40, 50), 5);
+    this.ball = new Ball(
+      new Victor(500, 500),
+      new Victor(Math.random() * 90 - 45, 50),
+      5
+    );
 
     this.simpleBumpers = [
-      new SimpleBumber(new Victor(500, 200), 20),
-      new SimpleBumber(new Victor(500, 700), 70),
-      new SimpleBumber(new Victor(150, 500), 50),
+      new SimpleBumber(new Victor(500, 200), 20, 10),
+      new SimpleBumber(new Victor(500, 700), 70, 50),
+      new SimpleBumber(new Victor(150, 500), 50, 10),
     ];
 
     this.simpleLines = [
@@ -103,6 +126,7 @@ class GameManager {
           .rotateDeg(2 * ballZuNormalenWinkel)
           .multiplyScalar(simpleLine.bouncyNessFactor);
         simpleLine.triggerAnimation();
+        this.updateScore(simpleLine.pointsPerHit);
       }
     });
 
@@ -123,6 +147,7 @@ class GameManager {
           .rotateDeg(2 * ballZuNormalenWinkel)
           .multiplyScalar(simpleBumber.bouncyNessFactor);
         simpleBumber.triggerAnimation();
+        this.updateScore(simpleBumber.pointsPerHit);
       }
     });
 
