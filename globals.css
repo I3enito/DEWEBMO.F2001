@@ -90,3 +90,10 @@ div.ground {
   position: absolute;
   transform-origin: top left;
 }
+
+.simpleBumber {
+  height: 5px;
+  background-color: green;
+  position: absolute;
+  transform-origin: top left;
+}

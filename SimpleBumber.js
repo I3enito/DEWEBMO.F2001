@@ -1,8 +1,13 @@
-class SimpleLine {
+class SimpleBumber {
   constructor(pointA, pointB, htmlId) {
     this.pointA = pointA;
     this.pointB = pointB;
     this.htmlId = htmlId;
+
+    this.keyPressed = false;
+
+    this.rotationDeg = 0;
+    this.maxRotationDeg = 45;
 
     this.ownCollisionPoint = new CollisionPoint("collisionPoint");
 
@@ -19,11 +24,30 @@ class SimpleLine {
       this.richtungsVektor.horizontalAngleDeg() * -1
     }deg)`;
 
-    this.divElement.classList.add("simpleLine");
+    this.divElement.classList.add("simpleBumber");
     this.divElement.id = htmlId;
 
     document.getElementById("ground").appendChild(this.divElement);
+
+    document.addEventListener("keydown", this.onKeyDown);
+    document.addEventListener("keyup", this.onKeyUp);
   }
+
+  onKeyDown = (event) => {
+    const keyCode = event.keyCode;
+
+    if (keyCode === 37) {
+      this.keyPressed = true;
+    }
+  };
+
+  onKeyUp = (event) => {
+    const keyCode = event.keyCode;
+
+    if (keyCode === 37) {
+      this.keyPressed = false;
+    }
+  };
 
   getProjectionDistance = (projektionsPunkt) => {
     const projektionAufRichtungsVektor = this.richtungsVektor
@@ -45,15 +69,7 @@ class SimpleLine {
       .add(this.ortsVektor)
       .subtract(projektionVonOrtsVektorAufRichtungsVektor);
 
-    if (
-      this.richtungsVektor.x > 0 &&
-      (collisionPoint.x > this.pointB.x || collisionPoint.x < this.pointA.x)
-    ) {
-      return 1000;
-    } else if (
-      this.richtungsVektor.x < 0 &&
-      (collisionPoint.x > this.pointA.x || collisionPoint.x < this.pointB.x)
-    ) {
+    if (collisionPoint.x > this.pointB.x || collisionPoint.x < this.pointA.x) {
       return 1000;
     }
 
@@ -64,5 +80,20 @@ class SimpleLine {
     this.ownCollisionPoint.updatePosition(collisionPoint);
 
     return distanzZwischenBeidenPunkten;
+  };
+
+  updateRotation = (secondsPassed) => {
+    const degreeStep = 2;
+
+    if (this.keyPressed && this.rotationDeg < this.maxRotationDeg) {
+      this.richtungsVektor.rotateDeg(degreeStep);
+      this.rotationDeg += degreeStep;
+    } else if (!this.keyPressed && this.rotationDeg > 0) {
+      this.richtungsVektor.rotateDeg(-degreeStep);
+      this.rotationDeg -= degreeStep;
+    }
+    this.divElement.style.transform = `rotateZ(${
+      this.richtungsVektor.horizontalAngleDeg() * -1
+    }deg)`;
   };
 }

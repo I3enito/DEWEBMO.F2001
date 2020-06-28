@@ -26,14 +26,27 @@ class GameManager {
   setupGame = () => {
     // this.registerGameElement(new Ball(800, 800, -10, 10, "ball"));
 
-    this.ball = new Ball(800, 800, -4, 6, "ball");
+    this.ball = new Ball(800, 800, -40, 6, "ball");
 
     this.simpleLines = [
-      new SimpleLine(new Victor(100, 100), new Victor(300, 200), "simpleLine1"),
-      new SimpleLine(new Victor(300, 300), new Victor(600, 200), "simpleLine2"),
+      // new SimpleLine(new Victor(0, 300), new Victor(370, 100), "simpleLine1"),
+      // new SimpleLine(
+      //   new Victor(630, 100),
+      //   new Victor(1000, 300),
+      //   "simpleLine2"
+      // ),
       // new SimpleLine(new Victor(100, 500), new Victor(300, 400)),
-      new SimpleLine(new Victor(600, 400), new Victor(900, 900), "simpleLine3"),
-      new SimpleLine(new Victor(100, 700), new Victor(600, 300), "simpleLine4"),
+      // new SimpleLine(new Victor(600, 400), new Victor(700, 700), "simpleLine3"),
+      // new SimpleLine(new Victor(300, 700), new Victor(400, 400), "simpleLine3"),
+      new SimpleLine(new Victor(600, 100), new Victor(100, 300), "simpleLine4"),
+    ];
+
+    this.simpleBumbers = [
+      new SimpleBumber(
+        new Victor(370, 110),
+        new Victor(450, 50),
+        "simpleBumberLeft"
+      ),
     ];
   };
 
@@ -55,7 +68,7 @@ class GameManager {
       secondsPassed
     );
 
-    this.simpleLines.forEach((simpleLine) => {
+    this.simpleLines.concat(this.simpleBumbers).forEach((simpleLine) => {
       if (simpleLine.getProjectionDistance(nextPositionVectorOfBall) < 10) {
         const simpleLineNormalenWinkel =
           simpleLine.richtungsVektor
@@ -82,6 +95,10 @@ class GameManager {
     }
 
     this.ball.updatePosition(secondsPassed);
+
+    this.simpleBumbers.forEach((simpleBumber) => {
+      simpleBumber.updateRotation(secondsPassed);
+    });
 
     this.ball.drawElement();
   };
