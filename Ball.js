@@ -17,7 +17,6 @@ class Ball {
 
   getNextSpeedVector = (secondsPassed) => {
     const speedVectorLength = this.speedVector.length();
-    console.log(speedVectorLength);
     return this.speedVector.clone().add(
       gravityVector
         .clone()

@@ -147,8 +147,6 @@ class GameManager {
     secondsPassed = (timeStamp - oldTimeStamp) / 1000;
     oldTimeStamp = timeStamp;
     fps = Math.round(1 / secondsPassed);
-    // console.log(fps);
-
     this.draw(!secondsPassed ? 0 : secondsPassed);
 
     window.requestAnimationFrame(this.gameLoop);
