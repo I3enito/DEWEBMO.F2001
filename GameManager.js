@@ -9,23 +9,9 @@ class GameManager {
     this.gameHasFinished = false;
     this.gameElements = [];
     this.tableElement = document.getElementById("ground");
-
-    new Line(
-      this.tableElement,
-      new Victor(100, 500),
-      new Victor(500, 550),
-      "line"
-    );
-
-    // this.simpleLine = new SimpleLine(
-    //   new Victor(100, 100),
-    //   new Victor(600, 300)
-    // );
   }
 
   setupGame = () => {
-    // this.registerGameElement(new Ball(800, 800, -10, 10, "ball"));
-
     this.ball = new Ball(800, 800, -40, 6, "ball");
 
     this.simpleLines = [
@@ -41,15 +27,15 @@ class GameManager {
       // new SimpleLine(new Victor(600, 100), new Victor(100, 300), "simpleLine4"),
     ];
 
-    this.simpleBumbers = [
-      new SimpleBumber(
+    this.simpleFlippers = [
+      new SimpleFlipper(
         new Victor(370, 110),
         new Victor(450, 50),
         "simpleBumberLeft",
         37,
         false
       ),
-      new SimpleBumber(
+      new SimpleFlipper(
         new Victor(640, 110),
         new Victor(550, 50),
         "simpleBumberRight",
@@ -77,11 +63,11 @@ class GameManager {
       secondsPassed
     );
 
-    this.simpleBumbers.forEach((simpleBumber) => {
-      simpleBumber.updateRotation(secondsPassed);
+    this.simpleFlippers.forEach((simpleFlipper) => {
+      simpleFlipper.updateRotation(secondsPassed);
     });
 
-    this.simpleLines.concat(this.simpleBumbers).forEach((simpleLine) => {
+    this.simpleLines.concat(this.simpleFlippers).forEach((simpleLine) => {
       if (simpleLine.getProjectionDistance(nextPositionVectorOfBall) < 10) {
         const simpleLineNormalenWinkel =
           simpleLine.richtungsVektor
@@ -101,10 +87,10 @@ class GameManager {
     });
 
     if (nextPositionVectorOfBall.x < 0 || nextPositionVectorOfBall.x > 1000) {
-      this.ball.speedVector.multiplyScalarX(-0.8);
+      this.ball.speedVector.multiplyScalarX(-0.5);
     }
     if (nextPositionVectorOfBall.y < 0) {
-      this.ball.speedVector.multiplyScalarY(-0.9);
+      this.ball.speedVector.multiplyScalarY(-0.1);
     }
 
     this.ball.updatePosition(secondsPassed);

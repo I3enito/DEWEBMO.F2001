@@ -1,11 +1,11 @@
-class SimpleBumber {
+class SimpleFlipper {
   constructor(pointA, pointB, htmlId, keyCode, isRotationInversed) {
     this.pointA = pointA;
     this.pointB = pointB;
     this.htmlId = htmlId;
     this.keyCode = keyCode;
 
-    this.bouncyNessFactor = 1.2;
+    this.bouncyNessFactor = 1;
 
     this.rotationFactor = isRotationInversed ? -1 : 1;
 
@@ -13,8 +13,6 @@ class SimpleBumber {
 
     this.rotationDeg = 0;
     this.maxRotationDeg = 45;
-
-    this.ownCollisionPoint = new CollisionPoint("collisionPoint");
 
     this.ortsVektor = pointA.clone();
     this.richtungsVektor = pointB.clone().subtract(pointA);
@@ -43,7 +41,7 @@ class SimpleBumber {
 
     if (keyCode === this.keyCode) {
       this.keyPressed = true;
-      this.bouncyNessFactor = 1.6;
+      this.bouncyNessFactor = 1.4;
     }
   };
 
@@ -52,7 +50,7 @@ class SimpleBumber {
 
     if (keyCode === this.keyCode) {
       this.keyPressed = false;
-      this.bouncyNessFactor = 1.2;
+      this.bouncyNessFactor = 1;
     }
   };
 
@@ -91,8 +89,6 @@ class SimpleBumber {
     const distanzZwischenBeidenPunkten = projektionsPunkt.distance(
       collisionPoint
     );
-
-    this.ownCollisionPoint.updatePosition(collisionPoint);
 
     return distanzZwischenBeidenPunkten;
   };

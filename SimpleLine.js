@@ -4,7 +4,7 @@ class SimpleLine {
     this.pointB = pointB;
     this.htmlId = htmlId;
 
-    this.bouncyNessFactor = 0.8;
+    this.bouncyNessFactor = 0.9;
 
     this.ownCollisionPoint = new CollisionPoint("collisionPoint");
 
