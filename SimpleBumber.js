@@ -4,6 +4,7 @@ class SimpleBumber {
     this.htmlId = htmlId;
 
     this.radius = radius;
+    const width = 2 * radius;
 
     this.bouncyNessFactor = 1.5;
 
@@ -12,14 +13,21 @@ class SimpleBumber {
     this.divElement = document.createElement("div");
     // this.divElement.style.width = this.richtungsVektor.clone().length();
 
-    this.divElement.style.width = this.radius * 2;
-    this.divElement.style.height = this.radius * 2;
-    this.divElement.style.borderRadius = `${this.radius}px`;
+    this.divElement.style.width = width;
+    this.divElement.style.height = width;
+    this.divElement.style.borderRadius = `${width}px`;
 
     this.divElement.style.bottom = this.ortsVektor.y - this.radius;
     this.divElement.style.left = this.ortsVektor.x - this.radius;
 
+    this.divElement.style.boxShadow = `${width / 10}px ${width / 10}px ${
+      width / 5
+    }px #6a7277, ${(width / 10) * -1}px ${(width / 10) * -1}px ${
+      width / 5
+    }px #ffffff`;
+
     this.divElement.classList.add("simpleBumber");
+    
     this.divElement.id = htmlId;
 
     document.getElementById("ground").appendChild(this.divElement);

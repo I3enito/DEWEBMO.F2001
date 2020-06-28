@@ -28,6 +28,10 @@ class SimpleFlipper {
     }deg)`;
 
     this.divElement.classList.add("simpleFlipper");
+
+    if (isRotationInversed) {
+      this.divElement.classList.add("right");
+    }
     this.divElement.id = htmlId;
 
     document.getElementById("ground").appendChild(this.divElement);

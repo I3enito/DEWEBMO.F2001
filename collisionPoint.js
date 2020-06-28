@@ -4,6 +4,8 @@ class CollisionPoint {
     this.element = document.createElement("div");
     this.element.classList.add("collisionPoint");
     document.getElementById("ground").appendChild(this.element);
+
+    this.radius = 5;
     // this.element = document.getElementById(htmlId);
   }
 
@@ -13,7 +15,7 @@ class CollisionPoint {
   };
 
   drawElement = () => {
-    this.element.style.left = this.positionVector.x;
-    this.element.style.bottom = this.positionVector.y;
+    this.element.style.left = this.positionVector.x - this.radius;
+    this.element.style.bottom = this.positionVector.y - this.radius;
   };
 }

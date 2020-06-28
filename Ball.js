@@ -21,8 +21,10 @@ class Ball {
     const speedVectorLength = this.speedVector.length();
     console.log(speedVectorLength);
     return this.speedVector.clone().add(
-      gravityVector.clone().multiplyScalar(secondsPassed * 60)
-      .multiplyScalar(speedVectorLength > 500 ? 0.9 : 1)
+      gravityVector
+        .clone()
+        .multiplyScalar(secondsPassed * 60)
+        .multiplyScalar(speedVectorLength > 500 ? 0.9 : 1)
     );
   };
 
@@ -53,7 +55,7 @@ class Ball {
   };
 
   drawElement = () => {
-    this.element.style.left = this.positionVector.x;
-    this.element.style.bottom = this.positionVector.y;
+    this.element.style.left = this.positionVector.x - 5;
+    this.element.style.bottom = this.positionVector.y - 5;
   };
 }

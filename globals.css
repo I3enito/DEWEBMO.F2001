@@ -2,8 +2,8 @@ div.ground {
   position: relative;
   width: 1000px;
   height: 1000px;
-  background-color: bisque;
   margin: auto;
+  background: #b7c5cd;
 }
 
 .flipper-container {
@@ -68,7 +68,10 @@ div.ground {
   display: block;
   width: 10px;
   height: 10px;
-  background-color: red;
+
+  border-radius: 50px;
+  background: linear-gradient(145deg, #fe5660, #d54851);
+  box-shadow: 1px 1px 2px #9c353b, -1px -1px 2px #ff6b79;
 }
 
 .collisionPoint {
@@ -76,7 +79,12 @@ div.ground {
   display: block;
   width: 10px;
   height: 10px;
-  background-color: violet;
+  z-index: 10;
+  transform-origin: center;
+
+  border-radius: 10px;
+  background: linear-gradient(145deg, #a5b1b9, #c4d3db);
+  box-shadow: 1px 1px 2px #808a90, -1px -1px 2px #eeffff;
 }
 
 /* .line {
@@ -85,20 +93,35 @@ div.ground {
 } */
 
 .simpleLine {
-  height: 5px;
-  background-color: black;
+  height: 2px;
+  background-color: #b7bec2;
   position: absolute;
-  transform-origin: top left;
+  transform-origin: center left;
+  border-radius: 2px;
+  box-sizing: border-box;
 }
 
 .simpleFlipper {
   height: 5px;
-  background-color: green;
+  border-radius: 5px;
   position: absolute;
-  transform-origin: top left;
+  transform-origin: bottom left;
+
+  border-radius: 16px;
+  background: #b7c5cd;
+  box-shadow: 1px 1px 2px #778085, -1px -1px 2px #f7ffff;
+}
+
+.simpleFlipper.right {
+  border-radius: 16px;
+  background: #b7c5cd;
+  box-shadow: -1px -1px 2px #778085, 1px 1px 2px #f7ffff;
 }
 
 .simpleBumber {
-  background-color: blue;
+  box-sizing: border-box;
+
   position: absolute;
+
+  background: linear-gradient(145deg, #c4d3db, #a5b1b9);
 }
