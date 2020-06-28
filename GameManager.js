@@ -1,7 +1,6 @@
 let secondsPassed;
 let oldTimeStamp;
 let fps;
-let scrollThreshHold = 0;
 
 class GameManager {
   constructor() {
@@ -80,8 +79,6 @@ class GameManager {
       new SimpleLine(new Victor(550, 1400), new Victor(700, 1350)),
 
       new SimpleLine(new Victor(850, 1600), new Victor(750, 1900)),
-
-
     ];
 
     this.simpleFlippers = [
@@ -201,19 +198,25 @@ class GameManager {
     fps = Math.round(1 / secondsPassed);
     this.draw(!secondsPassed ? 0 : secondsPassed);
 
-    if (scrollThreshHold === 0) {
-      const difference =
-        this.groundHeight +
+    // const difference =
+    //   this.groundHeight +
+    //   this.heightReserve -
+    //   this.ball.positionVector.y -
+    //   (window.scrollY + window.innerHeight / 2);
+    // window.scrollBy({
+    //   top: difference,
+    //   left: 0,
+    //   behavior: "auto",
+    // });
+
+    window.scrollTo({
+      top:
+        this.groundHeight -
+        window.innerHeight / 2 +
         this.heightReserve -
-        this.ball.positionVector.y -
-        (window.scrollY + window.innerHeight / 2);
-      window.scrollBy({
-        top: difference * 0.9,
-        left: 0,
-        behavior: "smooth",
-      });
-    }
-    scrollThreshHold = (scrollThreshHold + 1) % 2;
+        this.ball.positionVector.y,
+      left: 0,
+    });
 
     window.requestAnimationFrame(this.gameLoop);
   };
