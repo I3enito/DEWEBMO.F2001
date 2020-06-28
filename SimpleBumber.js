@@ -1,8 +1,13 @@
 class SimpleBumber {
-  constructor(pointA, pointB, htmlId) {
+  constructor(pointA, pointB, htmlId, keyCode, isRotationInversed) {
     this.pointA = pointA;
     this.pointB = pointB;
     this.htmlId = htmlId;
+    this.keyCode = keyCode;
+
+    this.bouncyNessFactor = 1.2;
+
+    this.rotationFactor = isRotationInversed ? -1 : 1;
 
     this.keyPressed = false;
 
@@ -36,16 +41,18 @@ class SimpleBumber {
   onKeyDown = (event) => {
     const keyCode = event.keyCode;
 
-    if (keyCode === 37) {
+    if (keyCode === this.keyCode) {
       this.keyPressed = true;
+      this.bouncyNessFactor = 1.6;
     }
   };
 
   onKeyUp = (event) => {
     const keyCode = event.keyCode;
 
-    if (keyCode === 37) {
+    if (keyCode === this.keyCode) {
       this.keyPressed = false;
+      this.bouncyNessFactor = 1.2;
     }
   };
 
@@ -69,7 +76,15 @@ class SimpleBumber {
       .add(this.ortsVektor)
       .subtract(projektionVonOrtsVektorAufRichtungsVektor);
 
-    if (collisionPoint.x > this.pointB.x || collisionPoint.x < this.pointA.x) {
+    if (
+      this.richtungsVektor.x > 0 &&
+      (collisionPoint.x > this.pointB.x || collisionPoint.x < this.pointA.x)
+    ) {
+      return 1000;
+    } else if (
+      this.richtungsVektor.x < 0 &&
+      (collisionPoint.x > this.pointA.x || collisionPoint.x < this.pointB.x)
+    ) {
       return 1000;
     }
 
@@ -83,12 +98,12 @@ class SimpleBumber {
   };
 
   updateRotation = (secondsPassed) => {
-    const degreeStep = 2;
+    const degreeStep = 3 * this.rotationFactor;
 
-    if (this.keyPressed && this.rotationDeg < this.maxRotationDeg) {
+    if (this.keyPressed && Math.abs(this.rotationDeg) < this.maxRotationDeg) {
       this.richtungsVektor.rotateDeg(degreeStep);
       this.rotationDeg += degreeStep;
-    } else if (!this.keyPressed && this.rotationDeg > 0) {
+    } else if (!this.keyPressed && Math.abs(this.rotationDeg) > 0) {
       this.richtungsVektor.rotateDeg(-degreeStep);
       this.rotationDeg -= degreeStep;
     }

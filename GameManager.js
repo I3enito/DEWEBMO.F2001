@@ -29,23 +29,32 @@ class GameManager {
     this.ball = new Ball(800, 800, -40, 6, "ball");
 
     this.simpleLines = [
-      // new SimpleLine(new Victor(0, 300), new Victor(370, 100), "simpleLine1"),
-      // new SimpleLine(
-      //   new Victor(630, 100),
-      //   new Victor(1000, 300),
-      //   "simpleLine2"
-      // ),
+      new SimpleLine(new Victor(0, 300), new Victor(370, 100), "simpleLine1"),
+      new SimpleLine(
+        new Victor(630, 100),
+        new Victor(1000, 300),
+        "simpleLine2"
+      ),
       // new SimpleLine(new Victor(100, 500), new Victor(300, 400)),
-      // new SimpleLine(new Victor(600, 400), new Victor(700, 700), "simpleLine3"),
-      // new SimpleLine(new Victor(300, 700), new Victor(400, 400), "simpleLine3"),
-      new SimpleLine(new Victor(600, 100), new Victor(100, 300), "simpleLine4"),
+      new SimpleLine(new Victor(600, 400), new Victor(700, 700), "simpleLine3"),
+      new SimpleLine(new Victor(300, 700), new Victor(400, 400), "simpleLine3"),
+      // new SimpleLine(new Victor(600, 100), new Victor(100, 300), "simpleLine4"),
     ];
 
     this.simpleBumbers = [
       new SimpleBumber(
         new Victor(370, 110),
         new Victor(450, 50),
-        "simpleBumberLeft"
+        "simpleBumberLeft",
+        37,
+        false
+      ),
+      new SimpleBumber(
+        new Victor(640, 110),
+        new Victor(550, 50),
+        "simpleBumberRight",
+        39,
+        true
       ),
     ];
   };
@@ -68,6 +77,10 @@ class GameManager {
       secondsPassed
     );
 
+    this.simpleBumbers.forEach((simpleBumber) => {
+      simpleBumber.updateRotation(secondsPassed);
+    });
+
     this.simpleLines.concat(this.simpleBumbers).forEach((simpleLine) => {
       if (simpleLine.getProjectionDistance(nextPositionVectorOfBall) < 10) {
         const simpleLineNormalenWinkel =
@@ -83,7 +96,7 @@ class GameManager {
         this.ball.speedVector
           .invert()
           .rotateDeg(2 * ballZuNormalenWinkel)
-          .multiplyScalar(0.9);
+          .multiplyScalar(simpleLine.bouncyNessFactor);
       }
     });
 
@@ -95,10 +108,6 @@ class GameManager {
     }
 
     this.ball.updatePosition(secondsPassed);
-
-    this.simpleBumbers.forEach((simpleBumber) => {
-      simpleBumber.updateRotation(secondsPassed);
-    });
 
     this.ball.drawElement();
   };
